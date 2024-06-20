@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { ItemsService } from './items.service';
 import { Item } from './item.model';
 import { ItemStatus } from './item-status.enum';
@@ -11,6 +19,12 @@ export class ItemsController {
   @Get()
   findAll(): Item[] {
     return this.itemsService.findAll();
+  }
+
+  // :をつけると、id がパラメーターとして渡される
+  @Get(':id')
+  findById(@Param('id') id: string): Item {
+    return this.itemsService.findById(id);
   }
 
   @Post()
@@ -29,5 +43,15 @@ export class ItemsController {
     };
 
     return this.itemsService.create(item);
+  }
+
+  @Patch(':id')
+  updateStatus(@Param('id') id: string): Item {
+    return this.itemsService.updateStatus(id);
+  }
+
+  @Delete(':id')
+  delete(@Param('id') id: string): void {
+    this.itemsService.delete(id);
   }
 }
