@@ -12,3 +12,9 @@ http://localhost:81/login?next=/
 
 nestjs@example.com
 password
+
+## Install TypeORM
+
+```bash
+npm install --save typeorm @nestjs/typeorm pg
+```
